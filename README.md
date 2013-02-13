@@ -3,6 +3,12 @@ dbcation
 
 Database backed vacation script for postfix
 
+Requirements
+=================================================================
+python
+python MySQLdb (yum install MySQL-python / apt-get install python-mysqldb)
+MySQL server
+
 
 Postfix configuration
 =================================================================
