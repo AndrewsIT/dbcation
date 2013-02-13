@@ -11,28 +11,23 @@ USAGE = '''\
  usage: python vacation.py sender@domain.tld recipient@domain.tld
 '''
 
-# History
-# =================================================================
-# v0.1 Created
-# v0.2 Fixed reply-to, updated logging
-# -----------------------------------------------------------------
-#
-
 import socket, threading, sys, time, re, syslog, os, MySQLdb, smtplib, string
 
 # MySQL configuration
 DB_HOST                  = "a.b.c.d"
 DB_USER                  = "user"
 DB_PASSWORD              = "password"
-DB_DB                    = "db"
+DB_DB                    = "vacation"
+
+# SMTP
+RELAY_HOST		 = "relay.domain.tld"
+
+# Verbose logging
+VERBOSE 		 = 0
 
 SENDER			 = sys.argv[1]
 RAW_RECIPIENT_LIST       = sys.argv[2].split('@')
 RECIPIENT		 = RAW_RECIPIENT_LIST[0] + "@" + RAW_RECIPIENT_LIST[1]
-
-RELAY_HOST		 = "relay.domain.tld"
-
-VERBOSE 		 = 0
 
 def mysql_conn(host, user, password, db, query):
 	"""Connect to MySQL server, execute query, return results"""
@@ -87,7 +82,6 @@ def vacation_thread(sender, recipient):
         	        	ooofrom = row[2]
 				try:
 					send_message(sender, ooofrom, subject, bodytext)
-					#if VERBOSE == 1:
 					syslog.syslog(syslog.LOG_INFO, "info: sent to=<" + str(sender) + "> local-recipient=<" + str(recipient) + "> reply-to=<" + str(ooofrom) + "> relay=[" + RELAY_HOST + "]" )
 				except Exception,e:
 					syslog.syslog(syslog.LOG_INFO, "fatal: could not send reply message")
@@ -100,15 +94,12 @@ def vacation_thread(sender, recipient):
 		else:
 			if VERBOSE == 1:
 				syslog.syslog(syslog.LOG_INFO, "info: message already sent to=<" + str(sender) + "> local-recipient=<" + str(recipient) + ">" )
-
-		#syslog.syslog(syslog.LOG_INFO, "info: sent to=<" + str(sender) + "> local-recipient=<" + str(recipient) + "> reply-to=<" + str(ooofrom) + ">" )			
 	except:
 		syslog.syslog(syslog.LOG_INFO, "fatal: Service failed ")
 
 def vacation_core():
 	"""Called by vacation() Establish syslog, establish socket, open threads"""
 	syslog.openlog("vacation", syslog.LOG_PID, syslog.LOG_MAIL)
-	#syslog.syslog(syslog.LOG_INFO, "info: start %s" % re.findall("[^\n]+", DESCRIPTION)[0].strip())
 	try:
 		threading.Thread(target=vacation_thread, args=(SENDER, RECIPIENT)).start()
 	except:
