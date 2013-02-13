@@ -8,7 +8,7 @@ DESCRIPTION = '''\
 
 '''
 USAGE = '''\
- usage: python vacation.py
+ usage: python vacation.py sender@domain.tld recipient@domain.tld
 '''
 
 # History
