@@ -57,8 +57,8 @@ Virtual hosting
 -----------------------------------------------------------------
 
 Postfix has the ability to alias mail from a virtual address to a local address, so this script allows you to send  
-vacation replies with an alternate replyto address.  Column username defines the email address which matches the  
-recipient address.  Column ooofrom is used as the replyto address in the vacation reply email to the sender.  If you  
+vacation replies with an alternate replyto address.  The column username defines the email address which matches the  
+recipient address.  The column ooofrom is used as the replyto address in the vacation reply email to the sender.  If you  
 plan on accepting messages for the same address that will be included in the replyto simply insert the same address  
 into the username and ooofrom columns.
 
