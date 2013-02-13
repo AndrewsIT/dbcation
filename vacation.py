@@ -3,8 +3,6 @@
 DESCRIPTION = '''\
   Vacation service for Postfix ver0.2 Copyright(C) 2013 M.Andrews
 		released under the BSD License.
-		Create: 2013/01/10
-		Update: 2013/01/10
 
 '''
 USAGE = '''\
