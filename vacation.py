@@ -17,36 +17,6 @@ USAGE = '''\
 # v0.2 Fixed reply-to, updated logging
 # -----------------------------------------------------------------
 #
-#
-# Postfix configuration
-# =================================================================
-#  main.cf
-# -----------------------------------------------------------------
-#
-# transport_maps = hash:/etc/postfix/transport
-# virtual_alias_maps = mysql:/etc/postfix/vacation.cf
-#
-#  master.cf
-# -----------------------------------------------------------------
-# 
-# vacation   unix  -       n       n       -       -       pipe
-#  flags=FR user=airadmin argv=/usr/bin/python /etc/postfix/vacation.py ${sender} ${recipient}
-# 
-#  transport
-# -----------------------------------------------------------------
-#
-# autoreply.domain.tld	vacation:
-#
-#  vacation.cf
-# -----------------------------------------------------------------
-#
-# hosts = a.b.c.d, w.x.y.z
-# user = abcd
-# password = wxyz
-# dbname = passwd
-# query = SELECT CONCAT('%s',"@autoreply.domain.tld"), '%s' FROM outofoffice WHERE username = '%s' AND NOW() BETWEEN startdate AND enddate
-#
-#
 
 import socket, threading, sys, time, re, syslog, os, MySQLdb, smtplib, string
 
