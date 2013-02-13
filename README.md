@@ -5,7 +5,7 @@ Database backed vacation script for postfix
 
 Requirements
 =================================================================
-python
+python<br>
 python MySQLdb (yum install MySQL-python / apt-get install python-mysqldb)
 MySQL server
 
