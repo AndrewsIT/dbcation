@@ -13,10 +13,8 @@ CREATE TABLE IF NOT EXISTS `outofoffice` (
   `startdate` datetime DEFAULT NULL,
   `enddate` datetime DEFAULT NULL,
   `subject` text,
-  `processed` int(11) DEFAULT '0',
   `bodytext` text,
   `ooofrom` varchar(64) DEFAULT NULL,
-  `hostname` text,
   PRIMARY KEY (`username`),
   KEY `enddate` (`enddate`),
   KEY `startdate` (`startdate`)
