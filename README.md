@@ -24,7 +24,7 @@ master.cf
 -----------------------------------------------------------------
  
 vacation   unix  -       n       n       -       -       pipe  
-flags=FR user=airadmin argv=/usr/bin/python /etc/postfix/vacation.py ${sender} ${recipient}
+flags=FR user=localuser argv=/usr/bin/python /etc/postfix/vacation.py ${sender} ${recipient}
  
 
 transport
